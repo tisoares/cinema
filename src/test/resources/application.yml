@@ -9,8 +9,14 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
   h2:
     console.enabled: true
   liquibase:
-    change-log: classpath:/db/changelog/db-changelog-master.xml
+    drop-first: false
+    default-schema: public
     enabled: false
+    change-log: classpath:/db/changelog/db-changelog-master.xml
+  profiles:
+    active: test
