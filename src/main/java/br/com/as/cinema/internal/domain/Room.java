@@ -1,11 +1,11 @@
 package br.com.as.cinema.internal.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -18,4 +18,8 @@ public class Room extends BaseEntity {
     private String number;
     @Column(name = "description", insertable = true, updatable = true, unique = false, length = 250)
     private String description;
+
+    @OneToMany(mappedBy = "room")
+    @JsonManagedReference
+    private Set<Seat> seats;
 }
