@@ -1,4 +1,4 @@
-package br.com.as.cinema;
+package br.com.as.cinema.utils;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 

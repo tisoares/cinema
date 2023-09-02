@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "seat",
         uniqueConstraints = {
-            @UniqueConstraint(name = "seat_uq", columnNames = {"room_id", "row", "number"})
+            @UniqueConstraint(name = "seat_uq", columnNames = {"room_id", "row_number", "seat_number"})
         })
 @Getter
 @Setter
@@ -21,13 +21,13 @@ public class Seat extends BaseEntity {
     @JoinColumn(name = "room_id", insertable = true, updatable = true)
     private Room room;
 
-    @Column(name = "row", insertable = true, updatable = true, unique = false, length = 5)
+    @Column(name = "row_number", insertable = true, updatable = true, unique = false, length = 5)
     private String row;
 
-    @Column(name = "number", insertable = true, updatable = true, unique = false)
+    @Column(name = "seat_number", insertable = true, updatable = true, unique = false)
     private Integer number;
 
-    @Column(name = "type", insertable = true, updatable = true, unique = false, length = 15)
+    @Column(name = "seat_type", insertable = true, updatable = true, unique = false, length = 15)
     @Enumerated(EnumType.STRING)
     private SeatType type;
 

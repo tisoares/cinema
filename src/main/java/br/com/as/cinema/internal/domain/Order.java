@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "order")
+@Table(name = "ticket_order")
 @Getter
 @Setter
 @SequenceGenerator(name = CinemaConstants.DEFAULT_SEQUENCE_NAME, sequenceName = "order_seq", allocationSize = 50, initialValue = 1000)

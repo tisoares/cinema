@@ -25,6 +25,6 @@ public class Movie extends BaseEntity {
 
     @Column(name = "status", insertable = true, updatable = true, unique = false, length = 15)
     @Enumerated(EnumType.STRING)
-    private MovieStatus status;
+    private MovieStatus status = MovieStatus.ACTIVE;
 
 }
