@@ -18,12 +18,12 @@ public class OrderPrice extends BaseEntity {
     @JoinColumn(name = "amount", insertable = true, updatable = true)
     private BigDecimal amount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     @JoinColumn(name = "order_id", insertable = true, updatable = true)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exhibition_price_id", insertable = true, updatable = true)
     private ExhibitionPrice exhibitionPrice;
 }

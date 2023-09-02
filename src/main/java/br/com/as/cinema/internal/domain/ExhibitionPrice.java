@@ -16,12 +16,12 @@ import lombok.Setter;
 @SequenceGenerator(name = CinemaConstants.DEFAULT_SEQUENCE_NAME, sequenceName = "exhibition_price_seq", allocationSize = 50, initialValue = 1000)
 public class ExhibitionPrice extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exhibition_id", insertable = true, updatable = true)
     @JsonBackReference
     private Exhibition exhibition;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "price_id", insertable = true, updatable = true)
     private Price price;
 }

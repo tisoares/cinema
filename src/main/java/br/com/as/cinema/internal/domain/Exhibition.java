@@ -18,11 +18,11 @@ import java.util.Set;
 @SequenceGenerator(name = CinemaConstants.DEFAULT_SEQUENCE_NAME, sequenceName = "exhibition_seq", allocationSize = 50, initialValue = 1000)
 public class Exhibition extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id", insertable = true, updatable = true)
     private Movie movie;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id", insertable = true, updatable = true)
     private Room room;
 

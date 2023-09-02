@@ -7,10 +7,10 @@ import br.com.as.cinema.internal.domain.enums.SeatStatus;
 import br.com.as.cinema.internal.domain.enums.SeatType;
 import br.com.as.cinema.internal.repository.RoomRepository;
 import br.com.as.cinema.internal.usecase.RoomCreate;
-import br.com.as.cinema.internal.usecase.RoomUpdate;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,7 @@ public class RoomCreateDefault implements RoomCreate {
     }
 
     @Override
+    @Transactional
     public Room execute(RoomSeats roomSeats) {
         Room room = new Room()
                 .setDescription(roomSeats.getDescription())

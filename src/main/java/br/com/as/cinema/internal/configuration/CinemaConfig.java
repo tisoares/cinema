@@ -15,8 +15,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableConfigurationProperties(CinemaProperties.class)
 @ConfigurationProperties(prefix = "spring.liquibase", ignoreUnknownFields = false)
 public class CinemaConfig {
-    @Bean
-    public SpringSecurityAuditorAware auditorProvider() {
-        return new SpringSecurityAuditorAware();
-    }
+//    @Bean
+//    public SpringSecurityAuditorAware auditorProvider() {
+//        return new SpringSecurityAuditorAware();
+//    }
 }

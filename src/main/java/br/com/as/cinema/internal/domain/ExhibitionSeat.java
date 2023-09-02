@@ -15,11 +15,11 @@ import lombok.Setter;
 @SequenceGenerator(name = "default_gen", sequenceName = "exhibition_seat_seq", allocationSize = 50, initialValue = 1000)
 public class ExhibitionSeat extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exhibition_id", insertable = true, updatable = true)
     private Exhibition exhibition;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seat_id", insertable = true, updatable = true)
     private Seat seat;
 
