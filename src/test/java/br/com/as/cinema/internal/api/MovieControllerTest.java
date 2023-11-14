@@ -5,21 +5,10 @@ import br.com.as.cinema.internal.domain.Movie;
 import br.com.as.cinema.internal.domain.enums.MovieStatus;
 import br.com.as.cinema.internal.usecase.MovieCreate;
 import br.com.as.cinema.utils.JsonUtils;
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
@@ -27,28 +16,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class,
-        TransactionDbUnitTestExecutionListener.class})
-class MovieControllerTest {
+class MovieControllerTest extends BaseTest {
 
     private static final String URL = CinemaConstants.URL_PREFIX_V1 + "movies";
 
     @Autowired
-    private WebApplicationContext webApplicationContext;
-    @Autowired
     private MovieCreate movieCreate;
-    private MockMvc mockMvc;
-
-    @BeforeEach
-    void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
 
     @Test
     @Transactional
     void getByUuid() throws Exception {
+
         Movie movie = movieCreate.execute(createMovie());
         mockMvc.perform(get(URL + "/" + movie.getUuid()))
                 .andDo(print())

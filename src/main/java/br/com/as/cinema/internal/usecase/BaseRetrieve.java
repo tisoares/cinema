@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public interface BaseRetrieve<T extends BaseEntity> {
 
+    T execute(T entity);
+
     Optional<T> execute(String uuid);
+
     Page<T> execute(Pageable pageable);
 
 }

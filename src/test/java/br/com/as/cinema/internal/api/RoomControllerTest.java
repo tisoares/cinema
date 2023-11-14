@@ -5,48 +5,23 @@ import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Room;
 import br.com.as.cinema.internal.usecase.RoomCreate;
 import br.com.as.cinema.utils.JsonUtils;
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import jakarta.transaction.Transactional;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class,
-        TransactionDbUnitTestExecutionListener.class})
-class RoomControllerTest {
+class RoomControllerTest extends BaseTest {
 
     private static final String URL = CinemaConstants.URL_PREFIX_V1 + "rooms";
 
     @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Autowired
     private RoomCreate roomCreate;
-
-    private MockMvc mockMvc;
-
-    @BeforeEach
-    void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
 
     @Test
     @Transactional
@@ -133,6 +108,7 @@ class RoomControllerTest {
                 .setNumber("1")
                 .setDescription("VIP");
     }
+
     private RoomSeats createRoomSeats() {
         return new RoomSeats()
                 .setNumber("1")
