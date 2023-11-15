@@ -1,8 +1,11 @@
 package br.com.as.cinema.external.api;
 
+import br.com.as.cinema.external.domain.SeatRequest;
 import br.com.as.cinema.internal.api.SeatController;
 import br.com.as.cinema.internal.domain.Seat;
-import br.com.as.cinema.internal.usecase.*;
+import br.com.as.cinema.internal.usecase.SeatCreate;
+import br.com.as.cinema.internal.usecase.SeatRetrieve;
+import br.com.as.cinema.internal.usecase.SeatUpdate;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.data.domain.Page;
@@ -32,8 +35,8 @@ public class SeatControllerDefault implements SeatController {
     }
 
     @Override
-    public Seat create(Seat seat) {
-        return seatCreate.execute(seat);
+    public Seat create(SeatRequest seatRequest) {
+        return seatCreate.execute(seatRequest);
     }
 
     @Override

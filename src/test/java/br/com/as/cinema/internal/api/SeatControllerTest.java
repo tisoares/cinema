@@ -1,8 +1,11 @@
 package br.com.as.cinema.internal.api;
 
+import br.com.as.cinema.BaseTest;
+import br.com.as.cinema.external.domain.SeatRequest;
 import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Room;
 import br.com.as.cinema.internal.domain.Seat;
+import br.com.as.cinema.internal.usecase.RoomCreate;
 import br.com.as.cinema.internal.usecase.SeatCreate;
 import br.com.as.cinema.utils.JsonUtils;
 import jakarta.transaction.Transactional;
@@ -22,6 +25,9 @@ class SeatControllerTest extends BaseTest {
 
     @Autowired
     private SeatCreate seatCreate;
+
+    @Autowired
+    private RoomCreate roomCreate;
 
     @Test
     @Transactional
@@ -48,10 +54,11 @@ class SeatControllerTest extends BaseTest {
     @Test
     @Transactional
     void create() throws Exception {
-        Seat seat = createSeat();
+        SeatRequest seat = createSeat();
+        String json = JsonUtils.toJson(seat);
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(JsonUtils.toJson(seat)))
+                        .content(json))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -62,9 +69,10 @@ class SeatControllerTest extends BaseTest {
     @Transactional
     void update() throws Exception {
         Seat seat = seatCreate.execute(createSeat());
-        Seat update = new Seat()
+        SeatRequest update = new SeatRequest()
                 .setRow("A")
-                .setNumber(5);
+                .setNumber(5)
+                .setRoom(seat.getRoom());
 
         mockMvc.perform(put(URL + "/" + seat.getUuid())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -80,7 +88,7 @@ class SeatControllerTest extends BaseTest {
     @Test
     @Transactional
     void updateNotFound() throws Exception {
-        Seat seat = createSeat();
+        SeatRequest seat = createSeat();
         mockMvc.perform(put(URL + "/" + seat.getUuid())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtils.toJson(seat)))
@@ -89,10 +97,46 @@ class SeatControllerTest extends BaseTest {
                 .andExpect(status().reason(Matchers.containsString("UUID not found")));
     }
 
-    private Seat createSeat() {
-        return new Seat()
+    @Test
+    @Transactional
+    void updateNotFoundRoomNull() throws Exception {
+        Seat seat = seatCreate.execute(createSeat());
+        SeatRequest update = new SeatRequest()
+                .setRow("A")
+                .setNumber(5);
+        mockMvc.perform(put(URL + "/" + seat.getUuid())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(JsonUtils.toJson(update)))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(status().reason(Matchers.containsString("Entity Room not found")));
+    }
+
+    @Test
+    @Transactional
+    void updateNotFoundRoom() throws Exception {
+        Seat seat = seatCreate.execute(createSeat());
+        Room room = new Room();
+        SeatRequest update = new SeatRequest()
+                .setRow("A")
+                .setNumber(5)
+                .setRoom(room);
+        mockMvc.perform(put(URL + "/" + seat.getUuid())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(JsonUtils.toJson(update)))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(status().reason(Matchers.containsString(String.format("Entity Room %s not found", room.getUuid()))));
+    }
+
+    private SeatRequest createSeat() {
+        Room room = roomCreate.execute(new Room()
+                .setDescription("VIP")
+                .setNumber("15"));
+
+        return new SeatRequest()
                 .setNumber(1)
                 .setRow("A")
-                .setRoom(new Room());
+                .setRoom(room);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.as.cinema.internal.api;
 
+import br.com.as.cinema.BaseTest;
 import br.com.as.cinema.external.domain.RoomSeats;
 import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Room;

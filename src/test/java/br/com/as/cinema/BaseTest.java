@@ -1,4 +1,4 @@
-package br.com.as.cinema.internal.api;
+package br.com.as.cinema;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;

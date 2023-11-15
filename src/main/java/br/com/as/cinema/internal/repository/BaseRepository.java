@@ -11,12 +11,12 @@ import java.util.Optional;
 
 
 @NoRepositoryBean
-public interface BaseRepository<T extends BaseEntity> extends PagingAndSortingRepository< T , Long>, CrudRepository<T , Long> {
+public interface BaseRepository<T extends BaseEntity> extends PagingAndSortingRepository<T, Long>, CrudRepository<T, Long> {
 
 //    @QueryHints({@QueryHint(name = AvailableSettings.JPA_LOCK_TIMEOUT, value = ""+LockOptions.SKIP_LOCKED)})
 //    @Lock(LockModeType.OPTIMISTIC)
 
     Optional<T> findByUuid(String uuid);
+
     Page<T> findAll(Pageable pageable);
-    boolean existsByUuid(String uuid);
 }

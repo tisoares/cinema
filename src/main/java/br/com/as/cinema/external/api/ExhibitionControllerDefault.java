@@ -1,5 +1,6 @@
 package br.com.as.cinema.external.api;
 
+import br.com.as.cinema.external.domain.ExhibitionRequest;
 import br.com.as.cinema.internal.api.ExhibitionController;
 import br.com.as.cinema.internal.domain.Exhibition;
 import br.com.as.cinema.internal.usecase.ExhibitionCreate;
@@ -33,8 +34,8 @@ public class ExhibitionControllerDefault implements ExhibitionController {
     }
 
     @Override
-    public Exhibition create(Exhibition exhibition) {
-        return exhibitionCreate.execute(exhibition);
+    public Exhibition create(ExhibitionRequest exhibitionRequest) {
+        return exhibitionCreate.execute(exhibitionRequest);
     }
 
     @Override
