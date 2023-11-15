@@ -1,6 +1,8 @@
 package br.com.as.cinema.internal.domain;
 
 import br.com.as.cinema.internal.domain.enums.ExhibitionSeatStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +19,12 @@ public class ExhibitionSeat extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exhibition_id", insertable = true, updatable = true)
+    @JsonBackReference
     private Exhibition exhibition;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seat_id", insertable = true, updatable = true)
+    @JsonIgnoreProperties(value = {"uuid"})
     private Seat seat;
 
     @Column(name = "status", insertable = true, updatable = true, unique = false, length = 15)

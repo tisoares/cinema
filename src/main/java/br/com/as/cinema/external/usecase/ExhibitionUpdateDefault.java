@@ -15,6 +15,6 @@ public class ExhibitionUpdateDefault extends BaseUpdateDefault<Exhibition> imple
 
     @Override
     protected Exhibition loadDependencies(Exhibition request, Exhibition saved) {
-        return null;
+        return request;
     }
 }

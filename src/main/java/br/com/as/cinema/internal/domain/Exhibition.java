@@ -3,6 +3,7 @@ package br.com.as.cinema.internal.domain;
 import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.enums.ExhibitionStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Exhibition extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id", insertable = true, updatable = true)
+    @JsonIgnoreProperties(value = {"seats"})
     private Room room;
 
     @JsonFormat(pattern = CinemaConstants.DATE_TIME_PATTERN)

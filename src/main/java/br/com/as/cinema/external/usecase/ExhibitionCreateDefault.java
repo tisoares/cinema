@@ -53,7 +53,7 @@ public class ExhibitionCreateDefault implements ExhibitionCreate {
         }
         return seats.stream()
                 .map(seat -> new ExhibitionSeat()
-                        .setSeat(seatRetrieve.execute(seat))
+                        .setSeat(seat)
                         .setStatus(ExhibitionSeatStatus.AVAILABLE)
                         .setExhibition(exhibition))
                 .collect(Collectors.toSet());
