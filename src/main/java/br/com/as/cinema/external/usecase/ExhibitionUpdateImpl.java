@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnSingleCandidate(ExhibitionUpdate.class)
-public class ExhibitionUpdateDefault extends BaseUpdateDefault<Exhibition> implements ExhibitionUpdate {
-    public ExhibitionUpdateDefault(BaseRepository<Exhibition> repository) {
+public class ExhibitionUpdateImpl extends BaseUpdateImpl<Exhibition> implements ExhibitionUpdate {
+    public ExhibitionUpdateImpl(BaseRepository<Exhibition> repository) {
         super(repository);
     }
 

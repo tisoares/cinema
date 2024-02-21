@@ -1,6 +1,7 @@
 package br.com.as.cinema.internal.api;
 
 import br.com.as.cinema.external.domain.ExhibitionRequest;
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Exhibition;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ public interface ExhibitionController {
     Optional<Exhibition> getByUuid(@PathVariable String uuid);
 
     @GetMapping
-    Page<Exhibition> getAll(Pageable pageable);
+    Page<Exhibition> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
     Exhibition create(@RequestBody ExhibitionRequest exhibitionRequest);

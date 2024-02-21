@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(OrderExpiredCancel.class)
-public class OrderExpiredCancelDefault implements OrderExpiredCancel {
+public class OrderExpiredCancelImpl implements OrderExpiredCancel {
 
     private final TransactionTemplate transactionManager;
     private final OrderRepository orderRepository;

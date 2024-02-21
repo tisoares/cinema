@@ -9,8 +9,10 @@ import br.com.as.cinema.internal.domain.Movie;
 import br.com.as.cinema.internal.domain.Price;
 import br.com.as.cinema.internal.domain.Room;
 import br.com.as.cinema.internal.domain.enums.ExhibitionStatus;
+import br.com.as.cinema.internal.domain.enums.MovieStatus;
 import br.com.as.cinema.internal.domain.enums.PriceStatus;
 import br.com.as.cinema.internal.usecase.ExhibitionCreate;
+import br.com.as.cinema.internal.usecase.MovieCreate;
 import br.com.as.cinema.internal.usecase.PriceCreate;
 import br.com.as.cinema.internal.usecase.RoomCreate;
 import br.com.as.cinema.utils.JsonUtils;
@@ -39,11 +41,13 @@ public class ExhibitionControllerTest extends BaseTest {
     private RoomCreate roomCreate;
     @Autowired
     private PriceCreate priceCreate;
+    @Autowired
+    private MovieCreate movieCreate;
 
     @Test
     @Transactional
     void getByUuid() throws Exception {
-        Exhibition exhibition = exhibitionCreate.execute(createExhibition());
+        Exhibition exhibition = exhibitionCreate.execute(createExhibition(1));
         mockMvc.perform(get(URL + "/" + exhibition.getUuid()))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -54,8 +58,13 @@ public class ExhibitionControllerTest extends BaseTest {
     @Test
     @Transactional
     void getAll() throws Exception {
-        Exhibition exhibition = exhibitionCreate.execute(createExhibition());
-        mockMvc.perform(get(URL))
+        Exhibition exhibition = exhibitionCreate.execute(createExhibition(2));
+        mockMvc.perform(get(URL)
+                        .param("$page", "0")
+                        .param("$size", "11")
+                        .param("$sort", "uuid desc")
+                        .param("$sort", "status asc")
+                )
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -65,10 +74,12 @@ public class ExhibitionControllerTest extends BaseTest {
     @Test
     @Transactional
     void create() throws Exception {
-        ExhibitionRequest exhibition = createExhibition();
+        ExhibitionRequest exhibition = createExhibition(3);
+        String json = JsonUtils.toJson(exhibition);
+        System.out.println(json);
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(JsonUtils.toJson(exhibition)))
+                        .content(json))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -78,7 +89,7 @@ public class ExhibitionControllerTest extends BaseTest {
     @Test
     @Transactional
     void update() throws Exception {
-        Exhibition exhibition = exhibitionCreate.execute(createExhibition());
+        Exhibition exhibition = exhibitionCreate.execute(createExhibition(4));
         ExhibitionRequest update = new ExhibitionRequest().setStatus(ExhibitionStatus.CANCELED);
         mockMvc.perform(put(URL + "/" + exhibition.getUuid())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -93,7 +104,7 @@ public class ExhibitionControllerTest extends BaseTest {
     @Test
     @Transactional
     void updateNotFound() throws Exception {
-        ExhibitionRequest exhibition = createExhibition();
+        ExhibitionRequest exhibition = createExhibition(5);
         String json = JsonUtils.toJson(exhibition);
         mockMvc.perform(put(URL + "/" + exhibition.getUuid())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -103,12 +114,12 @@ public class ExhibitionControllerTest extends BaseTest {
                 .andExpect(status().reason(containsString("UUID not found")));
     }
 
-    private ExhibitionRequest createExhibition() {
+    private ExhibitionRequest createExhibition(int roomNumber) {
         Room room = roomCreate.execute(new RoomSeats()
                 .setSeatsPerRow(2)
                 .setRows(2)
-                .setNumber("5")
-                .setDescription("VIP"));
+                .setNumber(roomNumber + "A")
+                .setDescription("Room number " + roomNumber));
 
         Price price = priceCreate.execute(new Price()
                 .setAmount(new BigDecimal("10.50"))
@@ -116,11 +127,15 @@ public class ExhibitionControllerTest extends BaseTest {
                 .setDescription("Regular")
                 .setDetails("Regular Price"));
 
+        Movie movie = movieCreate.execute(new Movie().setDescription("New Exhibition")
+                .setStatus(MovieStatus.ACTIVE)
+                .setDuration("125m"));
+
         return new ExhibitionRequest()
                 .setExhibitionAt(LocalDateTime.now())
                 .setStatus(ExhibitionStatus.ACTIVE)
                 .setRoom(room)
-                .setMovie(new Movie())
+                .setMovie(movie)
                 .setPrices(Collections.singleton(price));
     }
 }

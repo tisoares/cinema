@@ -1,5 +1,7 @@
 package br.com.as.cinema.external.usecase;
 
+import br.com.as.cinema.external.domain.SearchCriteria;
+import br.com.as.cinema.internal.configuration.EntitySpecification;
 import br.com.as.cinema.internal.domain.BaseEntity;
 import br.com.as.cinema.internal.repository.BaseRepository;
 import br.com.as.cinema.internal.usecase.BaseRetrieve;
@@ -14,9 +16,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 @AllArgsConstructor
-public abstract class BaseRetrieveDefault<T extends BaseEntity> implements BaseRetrieve<T> {
+public abstract class BaseRetrieveImpl<T extends BaseEntity> implements BaseRetrieve<T> {
 
-    private final BaseRepository<T> repository;
+    protected final BaseRepository<T> repository;
+    protected final EntitySpecification entitySpecification;
 
     @Override
     public Optional<T> execute(String uuid) {
@@ -24,8 +27,8 @@ public abstract class BaseRetrieveDefault<T extends BaseEntity> implements BaseR
     }
 
     @Override
-    public Page<T> execute(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<T> execute(Pageable pageable, SearchCriteria searchCriteria) {
+        return repository.findAll(entitySpecification.specificationBuilder(searchCriteria), pageable);
     }
 
 

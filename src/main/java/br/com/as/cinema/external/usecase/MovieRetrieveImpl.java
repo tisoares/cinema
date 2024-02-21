@@ -1,5 +1,6 @@
 package br.com.as.cinema.external.usecase;
 
+import br.com.as.cinema.internal.configuration.EntitySpecification;
 import br.com.as.cinema.internal.domain.Movie;
 import br.com.as.cinema.internal.repository.MovieRepository;
 import br.com.as.cinema.internal.usecase.MovieRetrieve;
@@ -8,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnSingleCandidate(MovieRetrieve.class)
-public class MovieRetrieveDefault extends BaseRetrieveDefault<Movie> implements MovieRetrieve {
-    public MovieRetrieveDefault(MovieRepository repository) {
-        super(repository);
+public class MovieRetrieveImpl extends BaseRetrieveImpl<Movie> implements MovieRetrieve {
+    public MovieRetrieveImpl(MovieRepository repository, EntitySpecification entitySpecification) {
+        super(repository, entitySpecification);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.as.cinema.external.api;
 
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.external.domain.SeatRequest;
 import br.com.as.cinema.internal.api.SeatController;
 import br.com.as.cinema.internal.domain.Seat;
@@ -18,7 +19,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(SeatController.class)
-public class SeatControllerDefault implements SeatController {
+public class SeatControllerImpl implements SeatController {
 
     private final SeatRetrieve seatRetrieve;
     private final SeatCreate seatCreate;
@@ -30,8 +31,8 @@ public class SeatControllerDefault implements SeatController {
     }
 
     @Override
-    public Page<Seat> getAll(Pageable pageable) {
-        return seatRetrieve.execute(pageable);
+    public Page<Seat> getAll(Pageable pageable, SearchCriteria searchCriteria) {
+        return seatRetrieve.execute(pageable, searchCriteria);
     }
 
     @Override

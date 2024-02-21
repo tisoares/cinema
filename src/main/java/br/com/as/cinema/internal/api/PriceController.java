@@ -1,6 +1,7 @@
 package br.com.as.cinema.internal.api;
 
 
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Price;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ public interface PriceController {
     Optional<Price> getByUuid(@PathVariable String uuid);
 
     @GetMapping
-    Page<Price> getAll(Pageable pageable);
+    Page<Price> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
     Price create(@RequestBody Price price);

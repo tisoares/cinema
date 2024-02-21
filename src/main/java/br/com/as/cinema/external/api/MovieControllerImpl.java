@@ -1,5 +1,6 @@
 package br.com.as.cinema.external.api;
 
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.internal.api.MovieController;
 import br.com.as.cinema.internal.domain.Movie;
 import br.com.as.cinema.internal.usecase.MovieCreate;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(MovieController.class)
-public class MovieControllerDefault implements MovieController {
+public class MovieControllerImpl implements MovieController {
 
     private final MovieRetrieve movieRetrieve;
     private final MovieCreate movieCreate;
@@ -28,8 +29,8 @@ public class MovieControllerDefault implements MovieController {
     }
 
     @Override
-    public Page<Movie> getAll(Pageable pageable) {
-        return movieRetrieve.execute(pageable);
+    public Page<Movie> getAll(Pageable pageable, SearchCriteria searchCriteria) {
+        return movieRetrieve.execute(pageable, searchCriteria);
     }
 
     @Override
