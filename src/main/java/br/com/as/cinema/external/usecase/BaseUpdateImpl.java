@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @AllArgsConstructor
-public abstract class BaseUpdateDefault<T extends BaseEntity> implements BaseUpdate<T> {
+public abstract class BaseUpdateImpl<T extends BaseEntity> implements BaseUpdate<T> {
 
     protected final BaseRepository<T> repository;
 

@@ -1,6 +1,7 @@
 package br.com.as.cinema.internal.api;
 
 
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.external.domain.SeatRequest;
 import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Seat;
@@ -16,7 +17,7 @@ public interface SeatController {
     Optional<Seat> getByUuid(@PathVariable String uuid);
 
     @GetMapping
-    Page<Seat> getAll(Pageable pageable);
+    Page<Seat> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
     Seat create(@RequestBody SeatRequest seatRequest);

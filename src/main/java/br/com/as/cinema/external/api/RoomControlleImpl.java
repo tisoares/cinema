@@ -1,6 +1,7 @@
 package br.com.as.cinema.external.api;
 
 import br.com.as.cinema.external.domain.RoomSeats;
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.internal.api.RoomController;
 import br.com.as.cinema.internal.domain.Room;
 import br.com.as.cinema.internal.usecase.RoomCreate;
@@ -18,7 +19,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(RoomController.class)
-public class RoomControllerDefault implements RoomController {
+public class RoomControlleImpl implements RoomController {
 
     private final RoomRetrieve roomRetrieve;
     private final RoomCreate roomCreate;
@@ -30,8 +31,8 @@ public class RoomControllerDefault implements RoomController {
     }
 
     @Override
-    public Page<Room> getAll(Pageable pageable) {
-        return roomRetrieve.execute(pageable);
+    public Page<Room> getAll(Pageable pageable, SearchCriteria searchCriteria) {
+        return roomRetrieve.execute(pageable, searchCriteria);
     }
 
     @Override

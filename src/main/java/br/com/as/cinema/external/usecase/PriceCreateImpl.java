@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @ConditionalOnSingleCandidate(PriceCreate.class)
 @AllArgsConstructor
-public class PriceCreateDefault implements PriceCreate {
+public class PriceCreateImpl implements PriceCreate {
 
     private final PriceRepository priceRepository;
 

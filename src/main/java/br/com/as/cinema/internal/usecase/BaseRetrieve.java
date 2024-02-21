@@ -1,6 +1,7 @@
 package br.com.as.cinema.internal.usecase;
 
 
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.internal.domain.BaseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,6 @@ public interface BaseRetrieve<T extends BaseEntity> {
 
     Optional<T> execute(String uuid);
 
-    Page<T> execute(Pageable pageable);
+    Page<T> execute(Pageable pageable, SearchCriteria searchCriteria);
 
 }

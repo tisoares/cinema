@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnSingleCandidate(RoomUpdate.class)
-public class RoomUpdateDefault extends BaseUpdateDefault<Room> implements RoomUpdate {
-    public RoomUpdateDefault(BaseRepository<Room> repository) {
+public class RoomUpdateImpl extends BaseUpdateImpl<Room> implements RoomUpdate {
+    public RoomUpdateImpl(BaseRepository<Room> repository) {
         super(repository);
     }
 

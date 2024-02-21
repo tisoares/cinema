@@ -1,5 +1,6 @@
 package br.com.as.cinema.external.usecase;
 
+import br.com.as.cinema.internal.configuration.EntitySpecification;
 import br.com.as.cinema.internal.domain.Room;
 import br.com.as.cinema.internal.repository.BaseRepository;
 import br.com.as.cinema.internal.usecase.RoomRetrieve;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnSingleCandidate(RoomRetrieve.class)
-public class RoomRetrieveDefault extends BaseRetrieveDefault<Room> implements RoomRetrieve {
+public class RoomRetrieveImpl extends BaseRetrieveImpl<Room> implements RoomRetrieve {
 
-    public RoomRetrieveDefault(BaseRepository<Room> repository) {
-        super(repository);
+    public RoomRetrieveImpl(BaseRepository<Room> repository, EntitySpecification entitySpecification) {
+        super(repository, entitySpecification);
     }
 }

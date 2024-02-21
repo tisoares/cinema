@@ -1,5 +1,6 @@
 package br.com.as.cinema.external.api;
 
+import br.com.as.cinema.external.domain.SearchCriteria;
 import br.com.as.cinema.internal.api.PriceController;
 import br.com.as.cinema.internal.domain.Price;
 import br.com.as.cinema.internal.usecase.PriceCreate;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(PriceController.class)
-public class PriceControllerDefault implements PriceController {
+public class PriceControllerImpl implements PriceController {
 
     private final PriceRetrieve priceRetrieve;
     private final PriceCreate priceCreate;
@@ -29,8 +30,8 @@ public class PriceControllerDefault implements PriceController {
     }
 
     @Override
-    public Page<Price> getAll(Pageable pageable) {
-        return priceRetrieve.execute(pageable);
+    public Page<Price> getAll(Pageable pageable, SearchCriteria searchCriteria) {
+        return priceRetrieve.execute(pageable, searchCriteria);
     }
 
     @Override

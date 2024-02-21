@@ -112,7 +112,7 @@ class RoomControllerTest extends BaseTest {
 
     private RoomSeats createRoomSeats() {
         return new RoomSeats()
-                .setNumber("1")
+                .setNumber("15A")
                 .setDescription("VIP")
                 .setRows(3)
                 .setSeatsPerRow(3);

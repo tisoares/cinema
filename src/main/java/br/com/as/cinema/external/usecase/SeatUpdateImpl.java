@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnSingleCandidate(SeatUpdate.class)
-public class SeatUpdateDefault extends BaseUpdateDefault<Seat> implements SeatUpdate {
+public class SeatUpdateImpl extends BaseUpdateImpl<Seat> implements SeatUpdate {
 
     private final RoomRetrieve roomRetrieve;
 
-    public SeatUpdateDefault(BaseRepository<Seat> repository, RoomRetrieve roomRetrieve) {
+    public SeatUpdateImpl(BaseRepository<Seat> repository, RoomRetrieve roomRetrieve) {
         super(repository);
         this.roomRetrieve = roomRetrieve;
     }

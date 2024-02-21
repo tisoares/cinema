@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnSingleCandidate(PriceUpdate.class)
-public class PriceUpdateDefault extends BaseUpdateDefault<Price> implements PriceUpdate {
-    public PriceUpdateDefault(BaseRepository<Price> repository) {
+public class PriceUpdateImpl extends BaseUpdateImpl<Price> implements PriceUpdate {
+    public PriceUpdateImpl(BaseRepository<Price> repository) {
         super(repository);
     }
 

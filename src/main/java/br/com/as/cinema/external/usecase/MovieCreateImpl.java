@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(MovieCreate.class)
-public class MovieCreateDefault implements MovieCreate {
+public class MovieCreateImpl implements MovieCreate {
 
     private final MovieRepository repository;
 
