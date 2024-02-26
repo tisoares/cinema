@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -16,8 +16,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "exhibition")
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SequenceGenerator(name = CinemaConstants.DEFAULT_SEQUENCE_NAME, sequenceName = "exhibition_seq", allocationSize = 50, initialValue = 1000)
 public class Exhibition extends BaseEntity {
 
@@ -34,6 +34,7 @@ public class Exhibition extends BaseEntity {
 
     @JsonFormat(pattern = CinemaConstants.DATE_TIME_PATTERN)
     @Column(name = "exhibition_at")
+    @EqualsAndHashCode.Include
     private LocalDateTime exhibitionAt;
 
     @Column(name = "status", insertable = true, updatable = true, unique = false, length = 15)

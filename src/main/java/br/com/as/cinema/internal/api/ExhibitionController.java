@@ -6,6 +6,7 @@ import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Exhibition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ public interface ExhibitionController {
     Page<Exhibition> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     Exhibition create(@RequestBody ExhibitionRequest exhibitionRequest);
 
     @PutMapping("/{uuid}")

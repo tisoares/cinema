@@ -5,16 +5,16 @@ import br.com.as.cinema.internal.configuration.LazyFieldsFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "exhibition_price",
         uniqueConstraints = {
                 @UniqueConstraint(name = "exhibition_price_uq", columnNames = {"exhibition_id", "price_id"})
         })
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SequenceGenerator(name = CinemaConstants.DEFAULT_SEQUENCE_NAME, sequenceName = "exhibition_price_seq", allocationSize = 50, initialValue = 1000)
 public class ExhibitionPrice extends BaseEntity {
 

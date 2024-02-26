@@ -12,7 +12,11 @@ public interface BaseRetrieve<T extends BaseEntity> {
 
     T execute(T entity);
 
+    T execute(T entity, String expand);
+
     Optional<T> execute(String uuid);
+
+    Optional<T> execute(String uuid, String expand);
 
     Page<T> execute(Pageable pageable, SearchCriteria searchCriteria);
 

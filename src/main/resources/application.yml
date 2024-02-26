@@ -24,8 +24,8 @@ spring:
           batch_size: 50
         order_inserts: true
         order_updates: true
-        format_sql: true
-    show-sql: true
+        format_sql: false
+    show-sql: false
   h2:
     console:
       enabled: true
@@ -41,3 +41,5 @@ spring:
     driverClassName: ${spring.datasource.driverClassName}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
+  profiles:
+    default: default
