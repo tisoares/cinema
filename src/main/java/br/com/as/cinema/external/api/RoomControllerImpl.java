@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @ConditionalOnSingleCandidate(RoomController.class)
-public class RoomControlleImpl implements RoomController {
+public class RoomControllerImpl implements RoomController {
 
     private final RoomRetrieve roomRetrieve;
     private final RoomCreate roomCreate;

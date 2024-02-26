@@ -5,19 +5,20 @@ import br.com.as.cinema.internal.configuration.LazyFieldsFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_price")
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SequenceGenerator(name = CinemaConstants.DEFAULT_SEQUENCE_NAME, sequenceName = "order_price_seq", allocationSize = 50, initialValue = 1000)
 public class OrderPrice extends BaseEntity {
 
     @JoinColumn(name = "amount", insertable = true, updatable = true)
+    @EqualsAndHashCode.Include
     private BigDecimal amount;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

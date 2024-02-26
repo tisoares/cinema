@@ -61,7 +61,7 @@ class SeatControllerTest extends BaseTest {
                         .content(json))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.uuid", is(seat.getUuid())));
     }
 

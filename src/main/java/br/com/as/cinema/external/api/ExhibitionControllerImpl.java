@@ -38,10 +38,7 @@ public class ExhibitionControllerImpl implements ExhibitionController {
 
     @Override
     public Exhibition create(ExhibitionRequest exhibitionRequest) {
-        logger.info("ExhibitionRequest: {]", exhibitionRequest);
-        Exhibition exb = exhibitionCreate.execute(exhibitionRequest);
-        logger.info("Exhibition: {}", exb);
-        return exb;
+        return exhibitionCreate.execute(exhibitionRequest);
     }
 
     @Override
