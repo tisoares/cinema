@@ -40,7 +40,7 @@ public class ExhibitionCreateImpl implements ExhibitionCreate {
         return transactionManager.execute(trx -> {
             Exhibition exhibition = new Exhibition()
                     .setExhibitionAt(exhibitionRequest.getExhibitionAt())
-                    .setRoom(roomRetrieve.execute(exhibitionRequest.getRoom())) // TODO: Fetch Seats
+                    .setRoom(roomRetrieve.execute(exhibitionRequest.getRoom(), "seats"))
                     .setMovie(movieRetrieve.execute(exhibitionRequest.getMovie()));
             exhibition.setUuid(exhibitionRequest.getUuid());
 

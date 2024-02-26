@@ -7,6 +7,7 @@ import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Seat;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ public interface SeatController {
     Page<Seat> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     Seat create(@RequestBody SeatRequest seatRequest);
 
 

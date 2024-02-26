@@ -52,7 +52,7 @@ public class EntitySpecification<T extends BaseEntity> {
                 case NOT_EQUALS -> criteriaBuilder.notEqual(from.get(field), filter.getValue());
                 case GREATER_THAN -> criteriaBuilder.greaterThanOrEqualTo(from.get(field), filter.getValue());
                 case LESS_THAN -> criteriaBuilder.lessThanOrEqualTo(from.get(field), filter.getValue());
-                case LIKE -> criteriaBuilder.like(from.get(field), filter.getValue());
+                case LIKE -> criteriaBuilder.like(from.get(field), "%" + filter.getValue() + "%");
             };
         };
     }

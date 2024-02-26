@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "room")
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SequenceGenerator(name = "default_gen", sequenceName = "room_seq", allocationSize = 50, initialValue = 1000)
 public class Room extends BaseEntity {
 

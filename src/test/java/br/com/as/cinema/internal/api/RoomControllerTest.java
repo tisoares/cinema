@@ -55,7 +55,7 @@ class RoomControllerTest extends BaseTest {
                         .content(JsonUtils.toJson(room)))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.description", is(room.getDescription())));
     }
 
@@ -68,7 +68,7 @@ class RoomControllerTest extends BaseTest {
                         .content(JsonUtils.toJson(room)))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.description", is(room.getDescription())))
                 .andExpect(jsonPath("$.uuid", is(room.getUuid())));
     }

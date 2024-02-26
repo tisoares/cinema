@@ -6,6 +6,7 @@ import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Price;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -19,6 +20,7 @@ public interface PriceController {
     Page<Price> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     Price create(@RequestBody Price price);
 
 

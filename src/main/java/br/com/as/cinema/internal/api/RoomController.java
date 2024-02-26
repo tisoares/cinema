@@ -7,6 +7,7 @@ import br.com.as.cinema.internal.configuration.CinemaConstants;
 import br.com.as.cinema.internal.domain.Room;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,9 +21,11 @@ public interface RoomController {
     Page<Room> getAll(Pageable pageable, SearchCriteria searchCriteria);
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     Room create(@RequestBody Room room);
 
     @PostMapping("/seats")
+    @ResponseStatus(HttpStatus.CREATED)
     Room create(@RequestBody RoomSeats roomSeats);
 
     @PutMapping("/{uuid}")

@@ -76,13 +76,12 @@ public class ExhibitionControllerTest extends BaseTest {
     void create() throws Exception {
         ExhibitionRequest exhibition = createExhibition(3);
         String json = JsonUtils.toJson(exhibition);
-        System.out.println(json);
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.uuid", is(exhibition.getUuid())));
     }
 
